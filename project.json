@@ -32,7 +32,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
+    "web":  "Microsoft.AspNet.Server.Kestrel --server.urls=http://*:5000/",
     "ef": "EntityFramework.Commands"
   },
 
@@ -53,9 +53,26 @@
   "scripts": {
     "prepublish": [
       "npm install",
-      "bower install",
       "gulp clean",
+      "gulp prepare",
+      "bower install",
       "gulp min"
+    ],
+    "postpublish": [
+      "clean:folder"
     ]
+  },
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": ["DEBUG", "TRACE"]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": ["RELEASE", "TRACE"],
+        "optimize": true
+      }
+    }
   }
 }

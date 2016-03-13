@@ -3,8 +3,29 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - expertlux</title>
-
+        <meta name="author" lang="ru" content="Peter Vale" />
+        <title>@ViewData["Title"] - Регистрация ООО, ИП, НКО под ключ</title>
+        <meta name="description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ"/>
+        <meta name="keywords" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ, Нотариус, Документы государственной регистрации, Консультации" />
+        <meta name="application-name" post="Эксперт Люкс" />
+        <link rel="canonical" href="http://oztro.zapto.org:5000" />
+        <link rel="icon" href="http://oztro.zapto.org:5000/favicon.ico" type="image/x-icon">
+	    <link rel="shortcut icon" href="http://oztro.zapto.org:5000/favicon.ico" type="image/x-icon">
+	    <link rel="image_src" href="/img/logo.png" />
+        <meta property="og:locale" content="ru_RU" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" />
+        <meta property="og:description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" />
+        <meta property="og:url" content="http://oztro.zapto.org:5000" />
+        <meta property="og:site_name" content="Эксперт Люкс, г. Пермь" />
+        <meta name="apple-mobile-web-app-capable" post="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" post="black" />
+        <meta name="msapplication-TileColor" post="#FFFFFF" />
+        <meta name="msapplication-TileImage" post="/img/logo.png" />
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
+        <meta name="format-detection" content="telephone=no">
         <environment names="Development">
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
             <link rel="stylesheet" href="~/css/site.css" />
@@ -14,36 +35,65 @@
                   asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
                   asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
             <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+                  asp-fallback-href="~/lib/font-awesome/css/font-awesome.min.css"
+                  asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
         </environment>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">expertlux</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+                    <span class="sr-only">Сендвич</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img class="nav-bar-logo" src="~/img/logo.png" alt="Экспер люкс">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">О Нас</a>
+                    </li>
+                    <li>
+                        <a href="#services">Цены</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#about">О нас</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Цены</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Контакты</a>
+                        </li>
                     </ul>
-                    @await Html.PartialAsync("_LoginPartial")
+                    <p class="copyright text-muted small">Авторские права &copy; Эксперт Люкс 2016. Все права защищены</p>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2016 - expertlux</p>
-            </footer>
+    </footer>
         </div>
 
         <environment names="Development">

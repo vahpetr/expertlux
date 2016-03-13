@@ -20,6 +20,8 @@ var webconfig = "./web.config";
 var paths = {
   content: content + "**/*.*",
   contentDest: webroot,
+  contentJs: content + "css/**/*.css",
+  contentJsDest: webroot + "css/",
   webconfig: webconfig,
   webconfigDest: webroot,
   jsFolder: webroot + "js/",
@@ -72,10 +74,20 @@ gulp.task('prepare:webconfig', ["clean"], function () {
     .pipe(gulp.dest(paths.webconfigDest));
 });
 
+gulp.task('css:prepare', function () {
+  return gulp.src(paths.contentJs)
+    .pipe(gulp.dest(paths.contentJsDest));
+});
+
 gulp.task('prepare', ['prepare:content', 'prepare:webconfig']);
 
 gulp.task("min", ["min:js", "min:css"]);
-gulp.task("build", ["min"]);//alias
+gulp.task("build", ["css:prepare"], function () {
+  return gulp.src([paths.css, "!" + paths.minCss])
+    .pipe(concat(paths.concatCssDest))
+    .pipe(cssmin())
+    .pipe(gulp.dest("."));
+});//alias
 
 gulp.task('prepublish', shell.task(project.scripts.prepublish))
 //gulp.task('postpublish', shell.task(project.scripts.postpublish))

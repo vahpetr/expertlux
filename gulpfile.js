@@ -12,9 +12,9 @@ var gulp = require("gulp"),
 var project = JSON.parse(fs.readFileSync('./project.json'));
 
 var webroot = "./wwwroot/";
-var content = "./content/";
-var styles = "./styles/";
-var scripts = "./scripts/";
+var content = "./Content/";
+var styles = "./Styles/";
+var scripts = "./Scripts/";
 var webconfig = "./web.config";
 
 var paths = {
@@ -64,12 +64,12 @@ gulp.task("min:css", function () {
     .pipe(gulp.dest("."));
 });
 
-gulp.task('prepare:content', ["clean"], function () {
+gulp.task('prepare:content', function () {
   return gulp.src(paths.content)
     .pipe(gulp.dest(paths.contentDest));
 });
 
-gulp.task('prepare:webconfig', ["clean"], function () {
+gulp.task('prepare:webconfig', function () {
   return gulp.src(paths.webconfig)
     .pipe(gulp.dest(paths.webconfigDest));
 });

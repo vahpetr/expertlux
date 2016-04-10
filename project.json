@@ -31,9 +31,13 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final"
   },
 
+"tools": {
+    "dotnet-watch": "1.0.0-*"
+  },
+
   "commands": {
-    "web":"Microsoft.AspNet.Server.Kestrel --server.urls=http://127.0.0.1:5004/",
-    "web-live": "Microsoft.AspNet.Server.Kestrel --server.urls http://unix:/run/expertlux-live.sock",
+    "web":"Microsoft.AspNet.Server.Kestrel --ASPNET_ENV=Development --server.urls=http://127.0.0.1:5004/",
+    "web-live": "Microsoft.AspNet.Server.Kestrel --server.urls=http://unix:/run/expertlux-live.sock",
     "ef": "EntityFramework.Commands"
   },
 
@@ -54,10 +58,7 @@
   "scripts": {
     "prepublish": [
       "npm install",
-      "gulp clean",
-      "gulp prepare",
-      "bower install --allow-root",
-      "gulp min"
+      "gulp release"
     ],
     "postpublish": [
       "clean:folder"
@@ -67,6 +68,17 @@
     "Debug": {
       "compilationOptions": {
         "define": ["DEBUG", "TRACE"]
+      }
+    },
+    "Development": {
+      "compilationOptions": {
+        "define": ["DEBUG", "TRACE"]
+      }
+    },
+    "Staging": {
+      "compilationOptions": {
+        "define": ["RELEASE"],
+        "optimize": true
       }
     },
     "Release": {

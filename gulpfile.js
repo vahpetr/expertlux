@@ -2,93 +2,141 @@
 "use strict";
 
 var gulp = require("gulp"),
-  rimraf = require("rimraf"),
-  concat = require("gulp-concat"),
-  cssmin = require("gulp-cssmin"),
-  uglify = require("gulp-uglify"),
-  fs = require('fs'),
-  shell = require('gulp-shell')
-  
+    rimraf = require("rimraf"),
+    concat = require("gulp-concat"),
+    cssmin = require("gulp-cssmin"),
+    uglify = require("gulp-uglify"),
+    fs = require('fs'),
+    shell = require('gulp-shell'),
+    watch = require('gulp-watch');
+
 var project = JSON.parse(fs.readFileSync('./project.json'));
 
-var webroot = "./wwwroot/";
 var content = "./Content/";
 var styles = "./Styles/";
 var scripts = "./Scripts/";
-var webconfig = "./web.config";
+var webroot = "./wwwroot/";
 
 var paths = {
-  content: content + "**/*.*",
-  contentDest: webroot,
-  contentJs: content + "css/**/*.css",
-  contentJsDest: webroot + "css/",
-  webconfig: webconfig,
-  webconfigDest: webroot,
-  jsFolder: webroot + "js/",
-  js: webroot + "js/**/*.js",
-  minJs: webroot + "js/**/*.min.js",
-  cssFolder: webroot + "css/",
-  css: webroot + "css/**/*.css",
-  minCss: webroot + "css/**/*.min.css",
-  concatJsDest: webroot + "app.js",
-  concatCssDest: webroot + "styles.css"
+    contentFavicon: content + "favicon.ico",
+    contentWebconfig: content + "web.config",
+    contentStyles: content + "styles/**/*.css",
+    contentScripts: content + "scripts/**/*.js",
+    contentImages: [content + "images/**/*.png", content + "images/**/*.jpg"],
+
+    siteFavicon: webroot,
+    siteWebconfig: webroot,
+    site: webroot,
+    siteStylesFolder: webroot + "styles/",
+    siteScriptsFolder: webroot + "scripts/",
+    siteImagesFolder: webroot + "images/",
+    siteLibsFolder: webroot + "libs/",
+    siteStyleMin: webroot + "styles.min.css",
+    siteScriptMin: webroot + "app.min.js"
 };
 
-gulp.task("clean", function(cb){
-    rimraf(webroot, cb);
+gulp.task("scripts:clean", function(cb) {
+    rimraf(paths.siteScriptsFolder, cb);
 });
 
-gulp.task("clean:js:folder", function (cb) {
-  rimraf(paths.jsFolder, cb);
+gulp.task("styles:clean", function(cb) {
+    rimraf(paths.siteStylesFolder, cb);
 });
 
-gulp.task("clean:css:folder", function (cb) {
-  rimraf(paths.cssFolder, cb);
+gulp.task("libs:clean", function(cb) {
+    rimraf(paths.siteLibsFolder, cb);
 });
 
-gulp.task("clean:folder", ["clean:js:folder", "clean:css:folder"]);
-
-gulp.task("min:js", function () {
-  return gulp.src([paths.js, "!" + paths.minJs], {
-    base: "."
-  })
-    .pipe(concat(paths.concatJsDest))
-    .pipe(uglify())
-    .pipe(gulp.dest("."));
+gulp.task("images:clean", function(cb) {
+    rimraf(paths.siteImagesFolder, cb);
 });
 
-gulp.task("min:css", function () {
-  return gulp.src([paths.css, "!" + paths.minCss])
-    .pipe(concat(paths.concatCssDest))
-    .pipe(cssmin())
-    .pipe(gulp.dest("."));
+gulp.task('prepare:favicon', function() {
+    return gulp.src(paths.contentFavicon)
+        .pipe(gulp.dest(paths.siteFavicon));
 });
 
-gulp.task('prepare:content', function () {
-  return gulp.src(paths.content)
-    .pipe(gulp.dest(paths.contentDest));
+gulp.task('prepare:webconfig', function() {
+    return gulp.src(paths.contentWebconfig)
+        .pipe(gulp.dest(paths.siteWebconfig));
 });
 
-gulp.task('prepare:webconfig', function () {
-  return gulp.src(paths.webconfig)
-    .pipe(gulp.dest(paths.webconfigDest));
+gulp.task('styles:prepare', ["styles:clean"], function() {
+    return gulp.src(paths.contentStyles)
+        .pipe(gulp.dest(paths.siteStylesFolder));
 });
 
-gulp.task('css:prepare', function () {
-  return gulp.src(paths.contentJs)
-    .pipe(gulp.dest(paths.contentJsDest));
+gulp.task('styles:min:prepare', function() {
+    return gulp.src(paths.contentStyles)
+        .pipe(concat(paths.siteStyleMin))
+        .pipe(cssmin())
+        .pipe(gulp.dest("."));
 });
 
-gulp.task('prepare', ['prepare:content', 'prepare:webconfig']);
+gulp.task('scripts:prepare', ["scripts:clean"], function() {
+    return gulp.src(paths.contentScripts)
+        .pipe(gulp.dest(paths.siteScriptsFolder));
+});
 
-gulp.task("min", ["min:js", "min:css"]);
-gulp.task("build", ["css:prepare"], function () {
-  return gulp.src([paths.css, "!" + paths.minCss])
-    .pipe(concat(paths.concatCssDest))
-    .pipe(cssmin())
-    .pipe(gulp.dest("."));
-});//alias
+gulp.task('scripts:min:prepare', function() {
+    return gulp.src(paths.contentScripts, {
+        base: "."
+    })
+        .pipe(concat(paths.siteScriptMin))
+        .pipe(uglify())
+        .pipe(gulp.dest("."));
+});
 
-gulp.task('prepublish', shell.task(project.scripts.prepublish))
+gulp.task('images:prepare', ["images:clean"], function() {
+    return gulp.src(paths.contentImages)
+        .pipe(gulp.dest(paths.siteImagesFolder));
+});
+
+gulp.task('libs:prepare', ["libs:clean"], shell.task("bower install --allow-root"));
+
+gulp.task('prepublish', shell.task(project.scripts.prepublish));
 //gulp.task('postpublish', shell.task(project.scripts.postpublish))
 //gulp.task('publish', ['prepublish', 'postpublish'])
+
+gulp.task('site:run', shell.task(['dnx web']));
+
+gulp.task('site:watch', shell.task(['dnx-watch web']));
+
+gulp.task('styles:watch', function(cb) {//'scripts:prepare'
+    watch(paths.contentStyles, function() {
+        return gulp.src(paths.contentStyles)
+            .pipe(watch(paths.contentStyles))
+            .pipe(gulp.dest(paths.siteStylesFolder))
+            .on('end', cb);
+    })
+});
+
+gulp.task('scripts:watch', function(cb) {//'scripts:prepare'
+    watch(paths.contentScripts, function() {
+        return gulp.src(paths.contentScripts)
+            .pipe(watch(paths.contentStyles))
+            .pipe(gulp.dest(paths.siteScriptsFolder))
+            .on('end', cb);
+    })
+});
+
+//development
+gulp.task('default', [
+    'prepare:favicon',
+    'prepare:webconfig',
+    'styles:prepare',
+    'scripts:prepare',
+    'images:prepare',
+    'libs:prepare',
+    'styles:watch',
+    'scripts:watch',
+    'site:run']);
+
+//release
+gulp.task('release', [
+    'prepare:favicon',
+    'prepare:webconfig',
+    'styles:min:prepare',
+    'scripts:min:prepare',
+    'images:prepare',
+    'libs:prepare']);

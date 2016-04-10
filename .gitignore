@@ -235,3 +235,6 @@ _Pvt_Extensions
 
 # local sqlite db
 *.db
+
+# bower
+Content/libs

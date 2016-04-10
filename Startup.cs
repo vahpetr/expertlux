@@ -41,6 +41,14 @@ namespace expertlux
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureRouting(routeOptions =>
+            {
+                // Append a trailing slash to all URL's.
+                routeOptions.AppendTrailingSlash = true;
+                // Ensure that all URL's are lower-case.
+                routeOptions.LowercaseUrls = true;
+            });
+            
             // Add framework services.
             services.AddEntityFramework()
                 .AddSqlite()

@@ -4,20 +4,24 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" lang="ru" content="Peter Vale" />
-        <title>@ViewData["Title"] - Регистрация ООО, ИП, НКО под ключ</title>
+        <title>Эксперт Люкс - Регистрация ООО, ИП, НКО под ключ</title>
         <meta name="description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ"/>
         <meta name="keywords" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ, Нотариус, Документы государственной регистрации, Консультации" />
         <meta name="application-name" post="Эксперт Люкс" />
-        <link rel="canonical" href="http://oztro.zapto.org:5000" />
-        <link rel="icon" href="http://oztro.zapto.org:5000/favicon.ico" type="image/x-icon">
-	    <link rel="shortcut icon" href="http://oztro.zapto.org:5000/favicon.ico" type="image/x-icon">
-	    <link rel="image_src" href="/img/logo.png" />
+        <link rel="canonical" href="~/" />
+        <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+	    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+	    <link rel="image_src" href="~/img/logo.png" />
         <meta property="og:locale" content="ru_RU" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" />
         <meta property="og:description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" />
-        <meta property="og:url" content="http://oztro.zapto.org:5000" />
-        <meta property="og:site_name" content="Эксперт Люкс, г. Пермь" />
+        <meta property="og:url" content="~/"/>
+        <meta property="og:site_name" content="Эксперт Люкс" />
+        <meta property="og:image" content="~/img/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="984">
+        <meta property="og:image:height" content="202">
         <meta name="apple-mobile-web-app-capable" post="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" post="black" />
         <meta name="msapplication-TileColor" post="#FFFFFF" />
@@ -26,17 +30,18 @@
         <meta http-equiv="Content-Script-Type" content="text/javascript">
         <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
         <meta name="format-detection" content="telephone=no">
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard"></script>
+        <environment names="Debug,Development">
+            <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/styles/site.css" />
         </environment>
         <environment names="Staging,Production">
             <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-href="~/libs/bootstrap/dist/css/bootstrap.min.css"
                   asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/site.min.css" asp-append-version="true" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
-                  asp-fallback-href="~/lib/font-awesome/css/font-awesome.min.css"
+                  asp-fallback-href="~/libs/font-awesome/css/font-awesome.min.css"
                   asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
         </environment>
     </head>
@@ -51,7 +56,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img class="nav-bar-logo" src="~/img/logo.png" alt="Экспер люкс">
+                    <img class="nav-bar-logo" src="~/images/logo.png" alt="Экспер люкс">
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
@@ -95,24 +100,22 @@
         </div>
     </footer>
         </div>
-
         <environment names="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/app.js"></script>
+            <script src="~/libs/jquery/dist/jquery.js"></script>
+            <script src="~/libs/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/scripts/app.js"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-src="~/libs/jquery/dist/jquery.min.js"
                     asp-fallback-test="window.jQuery">
             </script>
             <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-src="~/libs/bootstrap/dist/js/bootstrap.min.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
-            <script src="~/app.js" asp-append-version="true"></script>
+            <script src="~/app.min.js" asp-append-version="true"></script>
         </environment>
-
         @RenderSection("scripts", required: false)
     </body>
 </html>

@@ -1,9 +1,3 @@
-/*!
- * Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
 body,
 html {
     width: 100%;
@@ -37,7 +31,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    background: url(../images/intro-bg.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -123,7 +117,7 @@ h6 {
 .social {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(../img/social-bg.jpg) no-repeat center center;
+    background: url(../images/social-bg.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -424,4 +418,8 @@ a:hover, a:focus {
 
 .panel{
     text-align: left;
+}
+
+#contact {
+    padding-top: 17.5px;
 }

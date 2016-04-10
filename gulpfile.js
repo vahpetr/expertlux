@@ -31,7 +31,7 @@ var paths = {
     siteScriptsFolder: webroot + "scripts/",
     siteImagesFolder: webroot + "images/",
     siteLibsFolder: webroot + "libs/",
-    siteStyleMin: webroot + "styles.min.css",
+    siteStyleMin: webroot + "site.min.css",
     siteScriptMin: webroot + "app.min.js"
 };
 

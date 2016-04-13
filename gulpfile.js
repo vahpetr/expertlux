@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     fs = require('fs'),
     shell = require('gulp-shell'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    plumber = require('gulp-plumber');
 
 var project = JSON.parse(fs.readFileSync('./project.json'));
 
@@ -34,6 +35,10 @@ var paths = {
     siteStyleMin: webroot + "site.min.css",
     siteScriptMin: webroot + "app.min.js"
 };
+
+gulp.task("site:clean", function(cb) {
+    rimraf(paths.site, cb);
+});
 
 gulp.task("scripts:clean", function(cb) {
     rimraf(paths.siteScriptsFolder, cb);
@@ -68,6 +73,7 @@ gulp.task('styles:prepare', ["styles:clean"], function() {
 
 gulp.task('styles:min:prepare', function() {
     return gulp.src(paths.contentStyles)
+        .pipe(plumber())
         .pipe(concat(paths.siteStyleMin))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
@@ -82,6 +88,7 @@ gulp.task('scripts:min:prepare', function() {
     return gulp.src(paths.contentScripts, {
         base: "."
     })
+        .pipe(plumber())
         .pipe(concat(paths.siteScriptMin))
         .pipe(uglify())
         .pipe(gulp.dest("."));
@@ -92,7 +99,7 @@ gulp.task('images:prepare', ["images:clean"], function() {
         .pipe(gulp.dest(paths.siteImagesFolder));
 });
 
-gulp.task('libs:prepare', ["libs:clean"], shell.task("bower install --allow-root"));
+gulp.task('libs:prepare', shell.task("bower install --allow-root"));//, ["libs:clean"]
 
 gulp.task('prepublish', shell.task(project.scripts.prepublish));
 //gulp.task('postpublish', shell.task(project.scripts.postpublish))
@@ -105,6 +112,7 @@ gulp.task('site:watch', shell.task(['dnx-watch web']));
 gulp.task('styles:watch', function(cb) {//'scripts:prepare'
     watch(paths.contentStyles, function() {
         return gulp.src(paths.contentStyles)
+            .pipe(plumber())
             .pipe(watch(paths.contentStyles))
             .pipe(gulp.dest(paths.siteStylesFolder))
             .on('end', cb);
@@ -114,6 +122,7 @@ gulp.task('styles:watch', function(cb) {//'scripts:prepare'
 gulp.task('scripts:watch', function(cb) {//'scripts:prepare'
     watch(paths.contentScripts, function() {
         return gulp.src(paths.contentScripts)
+            .pipe(plumber())
             .pipe(watch(paths.contentStyles))
             .pipe(gulp.dest(paths.siteScriptsFolder))
             .on('end', cb);
@@ -134,6 +143,7 @@ gulp.task('default', [
 
 //release
 gulp.task('release', [
+    "site:clean",
     'prepare:favicon',
     'prepare:webconfig',
     'styles:min:prepare',

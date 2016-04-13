@@ -59,9 +59,6 @@
     "prepublish": [
       "npm install",
       "gulp release"
-    ],
-    "postpublish": [
-      "clean:folder"
     ]
   },
   "configurations": {

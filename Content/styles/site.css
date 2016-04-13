@@ -96,6 +96,14 @@ h6 {
     padding: 10px 0 20px 0;
 }
 
+.content-section-small i {
+    display: block;
+}
+
+.content-section-small a {
+    text-decoration: none;
+}
+
 .content-section-light {
     background-color: #f8f8f8;
 }
@@ -169,7 +177,6 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
-
 
 .navbar-brand {
  height: auto;
@@ -418,8 +425,4 @@ a:hover, a:focus {
 
 .panel{
     text-align: left;
-}
-
-#contact {
-    padding-top: 17.5px;
 }

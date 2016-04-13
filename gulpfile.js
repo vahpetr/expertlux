@@ -2,7 +2,7 @@
 "use strict";
 
 var gulp = require("gulp"),
-    rimraf = require("rimraf"),
+    rimraf = require("gulp-rimraf"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
@@ -36,24 +36,29 @@ var paths = {
     siteScriptMin: webroot + "app.min.js"
 };
 
-gulp.task("site:clean", function(cb) {
-    rimraf(paths.site, cb);
+gulp.task("site:clean", function() {
+    return gulp.src(paths.site, { read: false })
+        .pipe(rimraf({ force: true }));
 });
 
-gulp.task("scripts:clean", function(cb) {
-    rimraf(paths.siteScriptsFolder, cb);
+gulp.task("scripts:clean", function() {
+    return gulp.src(paths.siteScriptsFolder, { read: false })
+        .pipe(rimraf({ force: true }));
 });
 
-gulp.task("styles:clean", function(cb) {
-    rimraf(paths.siteStylesFolder, cb);
+gulp.task("styles:clean", function() {
+    return gulp.src(paths.siteStylesFolder, { read: false })
+        .pipe(rimraf({ force: true }));
 });
 
-gulp.task("libs:clean", function(cb) {
-    rimraf(paths.siteLibsFolder, cb);
+gulp.task("libs:clean", function() {
+    return gulp.src(paths.siteLibsFolder, { read: false })
+        .pipe(rimraf({ force: true }));
 });
 
-gulp.task("images:clean", function(cb) {
-    rimraf(paths.siteImagesFolder, cb);
+gulp.task("images:clean", function() {
+    return gulp.src(paths.siteImagesFolder, { read: false })
+        .pipe(rimraf({ force: true }));
 });
 
 gulp.task('prepare:favicon', function() {

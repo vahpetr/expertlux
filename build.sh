@@ -1,3 +1,5 @@
 npm install
 gulp release
-service supervisor restart
+/etc/init.d/supervisor force-stop && \
+/etc/init.d/supervisor stop && \
+/etc/init.d/supervisor start

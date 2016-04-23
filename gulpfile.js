@@ -36,7 +36,7 @@ var paths = {
     siteScriptMin: webroot + "app.min.js"
 };
 
-gulp.task("site:clean", function() {
+gulp.task("clean", function() {
     return gulp.src(paths.site, { read: false })
         .pipe(rimraf({ force: true }));
 });
@@ -148,7 +148,6 @@ gulp.task('default', [
 
 //release
 gulp.task('release', [
-    "site:clean",
     'prepare:favicon',
     'prepare:webconfig',
     'styles:min:prepare',

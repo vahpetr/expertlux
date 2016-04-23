@@ -213,7 +213,7 @@ h3.section-heading {
   position: absolute;
   content: "";
   width: 2px;
-  background-color: #f1f1f1;
+  background-color: #337AB7;
   left: 40px;
   margin-left: -1.5px;
 }
@@ -259,7 +259,7 @@ h3.section-heading {
   background-color: #fed136;
   color: black;
   border-radius: 100%;
-  border: 7px solid #f1f1f1;
+  border: 7px solid #337AB7;
   text-align: center;
 }
 .timeline > li .timeline-wrap h4 {
@@ -440,4 +440,22 @@ h3.section-subheading {
     height: 300px;
     background: url(../images/map.gif) no-repeat center center;
     background-size: cover;
+}
+
+.timeline .step{
+    background-size: cover;
+    color: #fff !important;
+    text-shadow: 1px 1px 1px black;
+}
+
+.timeline .step-1{
+    background: url(../images/step-1.jpg) no-repeat center center; 
+}
+
+.timeline .step-2{
+    background: url(../images/step-2.jpg) no-repeat center center; 
+}
+
+.timeline .step-3{
+    background: url(../images/step-3.jpg) no-repeat center center; 
 }

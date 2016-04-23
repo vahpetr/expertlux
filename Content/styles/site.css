@@ -435,3 +435,9 @@ h3.section-subheading {
     font-weight: 400;
     margin-bottom: 75px;
 }
+
+#map{
+    height: 300px;
+    background: url(../images/map.gif) no-repeat center center;
+    background-size: cover;
+}

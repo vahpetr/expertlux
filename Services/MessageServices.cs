@@ -1,7 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace expertlux.Services
 {
@@ -10,6 +12,7 @@ namespace expertlux.Services
     // For more details see this link http://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender
     {
+        //https://www.talksharp.com/aspnetcore-mailgun
         public Task SendEmailAsync(string email, string subject, string message)
         {
             // Plug in your email service here to send an email.
@@ -21,5 +24,6 @@ namespace expertlux.Services
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
+        
     }
 }

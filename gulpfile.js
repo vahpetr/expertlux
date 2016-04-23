@@ -23,7 +23,7 @@ var paths = {
     contentWebconfig: content + "web.config",
     contentStyles: content + "styles/**/*.css",
     contentScripts: content + "scripts/**/*.js",
-    contentImages: [content + "images/**/*.png", content + "images/**/*.jpg"],
+    contentImages: [content + "images/**/*.png", content + "images/**/*.jpg", content + "images/**/*.gif"],
 
     siteFavicon: webroot,
     siteWebconfig: webroot,
@@ -143,7 +143,7 @@ gulp.task('default', [
     'images:prepare',
     'libs:prepare',
     'styles:watch',
-    'scripts:watch',
+    // 'scripts:watch',
     'site:run']);
 
 //release

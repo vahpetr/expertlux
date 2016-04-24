@@ -24,7 +24,8 @@ var paths = {
     contentStyles: content + "styles/**/*.css",
     contentScripts: content + "scripts/**/*.js",
     contentImages: [content + "images/**/*.png", content + "images/**/*.jpg", content + "images/**/*.gif"],
-
+    contentLibs: 'bower_components',
+    
     siteFavicon: webroot,
     siteWebconfig: webroot,
     site: webroot,
@@ -36,47 +37,52 @@ var paths = {
     siteScriptMin: webroot + "app.min.js"
 };
 
-gulp.task("clean", function() {
+gulp.task("clean", function () {
     return gulp.src(paths.site, { read: false })
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task("scripts:clean", function() {
+gulp.task("scripts:clean", function () {
     return gulp.src(paths.siteScriptsFolder, { read: false })
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task("styles:clean", function() {
+gulp.task("styles:clean", function () {
     return gulp.src(paths.siteStylesFolder, { read: false })
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task("libs:clean", function() {
+gulp.task("libs:clean", function () {
     return gulp.src(paths.siteLibsFolder, { read: false })
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task("images:clean", function() {
+gulp.task("images:clean", function () {
     return gulp.src(paths.siteImagesFolder, { read: false })
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task('prepare:favicon', function() {
+gulp.task("libs:clean", function () {
+    return gulp.src(paths.siteLibsFolder, { read: false })
+        .pipe(rimraf({ force: true }));
+});
+
+gulp.task('prepare:favicon', function () {
     return gulp.src(paths.contentFavicon)
         .pipe(gulp.dest(paths.siteFavicon));
 });
 
-gulp.task('prepare:webconfig', function() {
+gulp.task('prepare:webconfig', function () {
     return gulp.src(paths.contentWebconfig)
         .pipe(gulp.dest(paths.siteWebconfig));
 });
 
-gulp.task('styles:prepare', ["styles:clean"], function() {
+gulp.task('styles:prepare', ["styles:clean"], function () {
     return gulp.src(paths.contentStyles)
         .pipe(gulp.dest(paths.siteStylesFolder));
 });
 
-gulp.task('styles:min:prepare', function() {
+gulp.task('styles:min:prepare', function () {
     return gulp.src(paths.contentStyles)
         .pipe(plumber())
         .pipe(concat(paths.siteStyleMin))
@@ -84,12 +90,12 @@ gulp.task('styles:min:prepare', function() {
         .pipe(gulp.dest("."));
 });
 
-gulp.task('scripts:prepare', ["scripts:clean"], function() {
+gulp.task('scripts:prepare', ["scripts:clean"], function () {
     return gulp.src(paths.contentScripts)
         .pipe(gulp.dest(paths.siteScriptsFolder));
 });
 
-gulp.task('scripts:min:prepare', function() {
+gulp.task('scripts:min:prepare', function () {
     return gulp.src(paths.contentScripts, {
         base: "."
     })
@@ -99,12 +105,15 @@ gulp.task('scripts:min:prepare', function() {
         .pipe(gulp.dest("."));
 });
 
-gulp.task('images:prepare', ["images:clean"], function() {
+gulp.task('images:prepare', ["images:clean"], function () {
     return gulp.src(paths.contentImages)
         .pipe(gulp.dest(paths.siteImagesFolder));
 });
 
-gulp.task('libs:prepare', shell.task("bower install --allow-root"));//, ["libs:clean"]
+gulp.task('libs:prepare', ["libs:clean"], function() {
+    return gulp.src(paths.contentLibs)
+        .pipe(gulp.dest(paths.siteLibsFolder));
+});
 
 gulp.task('prepublish', shell.task(project.scripts.prepublish));
 //gulp.task('postpublish', shell.task(project.scripts.postpublish))
@@ -114,8 +123,8 @@ gulp.task('site:run', shell.task(['dnx web']));
 
 gulp.task('site:watch', shell.task(['dnx-watch web']));
 
-gulp.task('styles:watch', function(cb) {//'scripts:prepare'
-    watch(paths.contentStyles, function() {
+gulp.task('styles:watch', function (cb) {//'scripts:prepare'
+    watch(paths.contentStyles, function () {
         return gulp.src(paths.contentStyles)
             .pipe(plumber())
             .pipe(watch(paths.contentStyles))
@@ -124,8 +133,8 @@ gulp.task('styles:watch', function(cb) {//'scripts:prepare'
     })
 });
 
-gulp.task('scripts:watch', function(cb) {//'scripts:prepare'
-    watch(paths.contentScripts, function() {
+gulp.task('scripts:watch', function (cb) {//'scripts:prepare'
+    watch(paths.contentScripts, function () {
         return gulp.src(paths.contentScripts)
             .pipe(plumber())
             .pipe(watch(paths.contentStyles))
@@ -144,7 +153,8 @@ gulp.task('default', [
     'libs:prepare',
     'styles:watch',
     // 'scripts:watch',
-    'site:run']);
+    'site:run'
+]);
 
 //release
 gulp.task('release', [
@@ -153,4 +163,5 @@ gulp.task('release', [
     'styles:min:prepare',
     'scripts:min:prepare',
     'images:prepare',
-    'libs:prepare']);
+    'libs:prepare'
+]);

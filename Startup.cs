@@ -12,7 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using expertlux.Models;
 using expertlux.Services;
+// using Microsoft.VisualStudio.Web.BrowserLink.Loader;
 
+//https://docs.asp.net/en/latest/security/app-secrets.html
+
+//https://github.com/dotnet/cli#installers-and-binaries
 namespace expertlux
 {
     public class Startup
@@ -22,6 +26,7 @@ namespace expertlux
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile("mailgun.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
@@ -64,6 +69,9 @@ namespace expertlux
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            
+            //http://asp.net-hacker.rocks/2016/03/21/configure-aspnetcore.html
+            services.AddInstance<IConfigurationRoot>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +82,13 @@ namespace expertlux
 
             if (env.IsDevelopment())
             {
+                // Allow updates to your files in Visual Studio to be shown in 
+                // the browser. You can use the Refresh 
+                // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter
+                // to refresh the browser.
+        
+                // app.UseBrowserLink();
+                
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }

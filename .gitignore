@@ -237,4 +237,7 @@ _Pvt_Extensions
 *.db
 
 # bower
-Content/libs
+bower_components
+
+# private configs
+mailgun.json

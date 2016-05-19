@@ -24,7 +24,7 @@ var paths = {
     contentStyles: content + "styles/**/*.css",
     contentScripts: content + "scripts/**/*.js",
     contentImages: [content + "images/**/*.png", content + "images/**/*.jpg", content + "images/**/*.gif"],
-    contentLibs: 'bower_components',
+    contentLibs: "./bower_components/**/*",
     
     siteFavicon: webroot,
     siteWebconfig: webroot,

@@ -65,7 +65,42 @@
                     </h3>
                 </div>
             </div>
-            @await Html.PartialAsync("_Сrier")
+            <br>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <form class="form" action="api/mail" method="POST">
+                        <input type="hidden" name="type" value="consultation">    
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2 col-sm-5 col-sm-offset-1">
+                            <div class="form-group name">
+                                <label class="sr-only" for="name">Имя</label>
+                                <input name="name" type="text" class="form-control" placeholder="Имя:">
+                            </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-5">
+                                <div class="form-group phone">
+                                    <label class="sr-only" for="phone">Телефон</label>
+                                    <input name="phone" type="phone" class="form-control" placeholder="Телефон:">
+                                </div>
+                            </div>
+                        </div>      
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <button type="submit" class="btn btn-lg btn-danger">Отправить</button>
+                            </div>
+                        </div> 
+                    </form>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <ul class="list-group list-group-note">
+                        <li class="list-group-item">&lowast; личные данные не подлежат разглашению и передаче третьим лицам</li>
+                        <li class="list-group-item">&lowast; государственные пошлины и иные обязательные платежи подлежат оплате дополнительно</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="content-section content-section-light">
@@ -184,7 +219,41 @@
                     </h3>
                 </div>
             </div>
-            @await Html.PartialAsync("_Сrier")
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <form class="form" action="api/mail" method="POST">
+                        <input type="hidden" name="type" value="seal">    
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2 col-sm-5 col-sm-offset-1">
+                            <div class="form-group name">
+                                <label class="sr-only" for="name">Имя</label>
+                                <input name="name" type="text" class="form-control" placeholder="Имя:">
+                            </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-5">
+                                <div class="form-group phone">
+                                    <label class="sr-only" for="phone">Телефон</label>
+                                    <input name="phone" type="phone" class="form-control" placeholder="Телефон:">
+                                </div>
+                            </div>
+                        </div>      
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <button type="submit" class="btn btn-lg btn-danger">Отправить</button>
+                            </div>
+                        </div> 
+                    </form>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <ul class="list-group list-group-note">
+                        <li class="list-group-item">&lowast; личные данные не подлежат разглашению и передаче третьим лицам</li>
+                        <li class="list-group-item">&lowast; государственные пошлины и иные обязательные платежи подлежат оплате дополнительно</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -195,7 +264,7 @@
             <div class="col-lg-12 col-sm-12 text-center">
                 <h4 class="section-heading">Мы находимся по адресу г.Пермь ул.Пушкина д.27</h4>
                 <hr class="primary">
-                <p>Ждём вас в будни с 09:00 до 18:00 на каком то этаже в каком то кабинете</p>
+                <p>"ждем Вас в будни с 10-00 до 18-00" Вход с улицы Пушкина напротив автобусной остановки</p>
                 <div id="map"></div>
             </div>
         </div>
@@ -223,7 +292,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-4 col-xs-4 text-center">
-                    <a href="mailto:slotinak@bk.ru">
+                    <a href="mailto:expertlux@bk.ru">
                         <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
                         expertlux@bk.ru
                     </a>
@@ -241,19 +310,19 @@
             <div class="col-lg-6">
                 <ul class="list-inline social-buttons">
                     <li>
-                        <a href="http://vk.com/share.php?url=http://oztro.zapto.org:5000" class="btn btn-default btn-lg">
+                        <a href="http://vk.com/share.php?url=http://expertlux.com&title=Эксперт люкс - эксперт твоего бизнеса!&description=Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" class="btn btn-default btn-lg">
                             <i class="fa fa-vk fa-fw"></i>
                             <span class="network-name">ВКонтакте</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/share?url=http://oztro.zapto.org:5000&hashtags=expertlux&text=Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" class="btn btn-default btn-lg">
+                        <a href="https://twitter.com/share?url=http://expertlux.com&hashtags=expertlux&text=Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" class="btn btn-default btn-lg">
                             <i class="fa fa-twitter fa-fw"></i>
                             <span class="network-name">Twitter</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/cws/share?url=http://oztro.zapto.org:5000" class="btn btn-default btn-lg">
+                        <a href="https://www.linkedin.com/cws/share?url=http://expertlux.com" class="btn btn-default btn-lg">
                             <i class="fa fa-linkedin fa-fw"></i>
                             <span class="network-name">Linkedin</span>
                         </a>

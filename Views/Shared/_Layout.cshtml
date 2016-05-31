@@ -3,66 +3,123 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - expertlux</title>
-
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
+        <meta name="author" lang="ru" content="vahpetr" />
+        <title>Эксперт люкс - эксперт твоего бизнеса! Регистрация ООО, ИП, НКО под ключ</title>
+        <meta name="description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ"/>
+        <meta name="keywords" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ, Нотариус, Документы государственной регистрации, Консультации" />
+        <meta name="application-name" post="Эксперт Люкс" />
+        <link rel="canonical" href="http://expertlux.com" />
+        <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+	    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+	    <link rel="image_src" href="~/img/logo.png" />
+        <meta property="og:locale" content="ru_RU" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Эксперт люкс - эксперт твоего бизнеса!" />
+        <meta property="og:description" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ" />
+        <meta property="og:url" content="http://expertlux.com"/>
+        <meta property="og:site_name" content="Эксперт Люкс" />
+        <meta property="og:image" content="~/img/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="984">
+        <meta property="og:image:height" content="202">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="Эксперт Люкс, г. Пермь, Регистрация ООО, ИП, НКО под ключ">
+        <meta name="twitter:creator" content="vahpetr">       
+        <meta name="apple-mobile-web-app-capable" post="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" post="black" />
+        <meta name="msapplication-TileColor" post="#FFFFFF" />
+        <meta name="msapplication-TileImage" post="/img/logo.png" />
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+        <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
+        <meta name="format-detection" content="telephone=no">
+        <environment names="Debug,Development">
+            <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
+            <link rel="stylesheet" href="~/styles/site.css" />
         </environment>
+        <script async src="//www.google-analytics.com/analytics.js"></script>
         <environment names="Staging,Production">
             <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-href="~/libs/bootstrap/dist/css/bootstrap.min.css"
                   asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/site.min.css" asp-append-version="true" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+                  asp-fallback-href="~/libs/font-awesome/css/font-awesome.min.css"
+                  asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
         </environment>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">expertlux</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+                    <span class="sr-only">Сендвич</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img class="nav-bar-logo" src="~/images/logo.png" alt="Экспер люкс">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">О Нас</a>
+                    </li>
+                    <li>
+                        <a href="#services">Сервис</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#about">О нас</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Сервис</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Контакты</a>
+                        </li>
                     </ul>
-                    @await Html.PartialAsync("_LoginPartial")
+                    <p class="copyright text-muted small">Авторские права &copy; Эксперт Люкс 2016. Все права защищены</p>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2016 - expertlux</p>
-            </footer>
+    </footer>
         </div>
-
         <environment names="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js"></script>
+            <script src="~/libs/jquery/dist/jquery.js"></script>
+            <script src="~/libs/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/scripts/app.js"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-src="~/libs/jquery/dist/jquery.min.js"
                     asp-fallback-test="window.jQuery">
             </script>
             <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-src="~/libs/bootstrap/dist/js/bootstrap.min.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
+            <script src="~/app.min.js" asp-append-version="true"></script>
         </environment>
-
         @RenderSection("scripts", required: false)
     </body>
 </html>

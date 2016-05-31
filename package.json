@@ -2,10 +2,14 @@
   "name": "expertlux",
   "version": "0.0.0",
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "fs": "0.0.2",
+    "gulp": "^3.9.1",
     "gulp-concat": "2.5.2",
     "gulp-cssmin": "0.1.7",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-shell": "^0.5.2",
     "gulp-uglify": "1.2.0",
-    "rimraf": "2.2.8"
+    "gulp-watch": "^4.3.5"
   }
 }

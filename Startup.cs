@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using expertlux.Models;
 using expertlux.Services;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
 // using Microsoft.VisualStudio.Web.BrowserLink.Loader;
 
 //https://docs.asp.net/en/latest/security/app-secrets.html
@@ -64,7 +66,12 @@ namespace expertlux
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(options => {
+                    var settings = options.SerializerSettings;
+                    settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    settings.Converters.Add(new StringEnumConverter());
+                });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

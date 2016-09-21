@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,36 +33,8 @@
         <meta http-equiv="Content-Script-Type" content="text/javascript">
         <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
         <meta name="format-detection" content="telephone=no">
-        <environment names="Debug,Development">
-            <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
-            <link rel="stylesheet" href="~/styles/site.css" />
-        </environment>
-        <script async src="//www.google-analytics.com/analytics.js"></script>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-                  asp-fallback-href="~/libs/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/site.min.css" asp-append-version="true" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
-                  asp-fallback-href="~/libs/font-awesome/css/font-awesome.min.css"
-                  asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
-        </environment>
     </head>
-    <body>     
-        <div vocab="http://schema.org/" typeof="LocalBusiness" class="hidden">
-            <span property="name">Эксперт люкс</span>
-            <span property="description">Регистрация ООО, ИП, НКО под ключ, Нотариус, Документы государственной регистрации, Консультации</span>
-            <div property="address" typeof="PostalAddress">
-                <span property="streetAddress">ул.Пушкина д.27</span>
-                <span property="addressLocality">г.Пермь </span>,
-                <span property="addressRegion">RU</span>
-            </div>
-            <span property="telephone">89026460866</span>
-            <span property="telephone">2760866</span>
-            <span property="email">expertlux@bk.ru</span>
-            <span property="url">expertlux.com</span>
-        </div>
+    <body>
         <nav class="navbar navbar-default" role="navigation">
         <div class="container topnav">
             <div class="navbar-header">
@@ -116,8 +88,35 @@
             </div>
         </div>
     </footer>
+        <div vocab="http://schema.org/" typeof="LocalBusiness" class="hidden">
+            <span property="name">Эксперт люкс</span>
+            <span property="description">Регистрация ООО, ИП, НКО под ключ, Нотариус, Документы государственной регистрации, Консультации</span>
+            <div property="address" typeof="PostalAddress">
+                <span property="streetAddress">ул.Пушкина д.27</span>
+                <span property="addressLocality">г.Пермь </span>,
+                <span property="addressRegion">RU</span>
+            </div>
+            <span property="telephone">89026460866</span>
+            <span property="telephone">2760866</span>
+            <span property="email">expertlux@bk.ru</span>
+            <span property="url">expertlux.com</span>
         </div>
-        <environment names="Development">
+        <environment names="Debug,Development">
+            <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/styles/site.css" />
+            <link rel="stylesheet" href="~/libs/font-awesome/css/font-awesome.css" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+                  asp-fallback-href="~/libs/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/site.min.css.gz" asp-append-version="true" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
+                  asp-fallback-href="~/libs/font-awesome/css/font-awesome.min.css"
+                  asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
+        </environment>
+        <script async src="//www.google-analytics.com/analytics.js"></script>
+                <environment names="Development">
             <script src="~/libs/jquery/dist/jquery.js"></script>
             <script src="~/libs/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/scripts/app.js"></script>
@@ -131,7 +130,7 @@
                     asp-fallback-src="~/libs/bootstrap/dist/js/bootstrap.min.js"
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
             </script>
-            <script src="~/app.min.js" asp-append-version="true"></script>
+            <script src="~/app.min.js.gz" asp-append-version="true"></script>
         </environment>
         @RenderSection("scripts", required: false)
     </body>

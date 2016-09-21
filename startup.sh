@@ -13,4 +13,6 @@ export HOME=/root
 --server.urls=http://127.0.0.1:5004/
 #--server.urls=http://unix:/run/expertlux-live.sock
 
+#dnx Microsoft.Dnx.ApplicationHost --configuration Release Microsoft.AspNet.Server.Kestrel --server.urls=http://127.0.0.1:5004/
+
 

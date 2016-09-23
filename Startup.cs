@@ -75,7 +75,7 @@ namespace expertlux
                 options.CacheProfiles.Add("Default",
                     new CacheProfile()
                     {
-                        Duration = 60 * 60 * 24 // one day
+                        Duration = 60 * 60 * 24 * 7 // 7 day
                     });
                 options.CacheProfiles.Add("Never",
                     new CacheProfile()
@@ -142,10 +142,11 @@ namespace expertlux
                 OnPrepareResponse = context =>
                 {
                     var headers = context.Context.Response.GetTypedHeaders();
+                    headers.Expires = DateTime.UtcNow.AddDays(7);
                     headers.CacheControl = new CacheControlHeaderValue()
                     {
-                        MaxAge = TimeSpan.FromDays(1),
-            
+                        MaxAge = TimeSpan.FromDays(7),
+                        Public = true
                     };
                     if (headers.ContentType.MediaType == "application/x-gzip")
                     {

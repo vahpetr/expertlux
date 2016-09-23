@@ -18,6 +18,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.StaticFiles;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.Cors.Infrastructure;
 // using Microsoft.VisualStudio.Web.BrowserLink.Loader;
 
 //https://docs.asp.net/en/latest/security/app-secrets.html
@@ -83,6 +84,11 @@ namespace expertlux
                         Location = ResponseCacheLocation.None,
                         NoStore = true
                     });
+                options.CacheProfiles.Add("Day",
+                    new CacheProfile()
+                    {
+                        Duration = 60 * 60 * 24 // day
+                    });
             })
             .AddJsonOptions(options =>
             {
@@ -90,6 +96,16 @@ namespace expertlux
                 settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 settings.Converters.Add(new StringEnumConverter());
             });
+
+            services.AddCors(options => options.AddPolicy(
+                "AllowAll",
+                new CorsPolicyBuilder()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                    .Build()
+            ));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -137,6 +153,7 @@ namespace expertlux
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseDefaultFiles();
+            
             app.UseStaticFiles(new StaticFileOptions
             {
                 OnPrepareResponse = context =>
@@ -174,6 +191,8 @@ namespace expertlux
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseCors("AllowAll");
         }
 
         // Entry point for the application.

@@ -13,6 +13,6 @@
     "gulp-shell": "^0.5.2",
     "gulp-uglify": "1.2.0",
     "gulp-watch": "^4.3.5",
-    "imagemin-jpeg-recompress": "^5.1.0"
+    "imagemin-jpeg-recompress": "github:vahpetr/imagemin-jpeg-recompress"
   }
 }

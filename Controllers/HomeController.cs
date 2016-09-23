@@ -6,10 +6,10 @@ using Microsoft.AspNet.Mvc;
 
 namespace expertlux.Controllers
 {
-    [ResponseCache(Duration = 30)]
+    // [ResponseCache(Duration = 30)]
     public class HomeController : Controller
     {
-        [ResponseCache(CacheProfileName = "Default")]
+        // [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
             return View();

@@ -54,7 +54,7 @@
   "scripts": {
     "prepublish": [
       "npm install",
-      "bower install --allow-root",
+      "bower install --allow-root --silent --quiet",
       "gulp clean",
       "gulp release"
     ]

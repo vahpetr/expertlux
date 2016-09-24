@@ -6,6 +6,11 @@ fi
 
 export HOME=/root
 
+
+npm install &&
+bower install --allow-root --silent &&
+gulp clean &&
+gulp release &&
 #cd '/var/www/expertlux' ;  
 /root/.dnx/runtimes/dnx-mono.1.0.0-rc1-update2/bin/dnx \
 --appbase /var/www/expertlux Microsoft.Dnx.ApplicationHost \

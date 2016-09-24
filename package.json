@@ -2,6 +2,7 @@
   "name": "expertlux",
   "version": "0.0.0",
   "devDependencies": {
+    "bower": "^1.7.9",
     "fs": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-concat": "2.5.2",

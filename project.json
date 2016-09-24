@@ -36,6 +36,7 @@
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://127.0.0.1:5004 --ASPNET_ENV Development",
+    "web-staging": "Microsoft.AspNet.Server.Kestrel --server.urls http://127.0.0.1:5004 --ASPNET_ENV Production",
     "web-live": "Microsoft.AspNet.Server.Kestrel --server.urls http://unix:/run/expertlux-live.sock --ASPNET_ENV Production",
     "ef": "EntityFramework.Commands"
   },
@@ -54,7 +55,7 @@
   "scripts": {
     "prepublish": [
       "npm install",
-      "bower install --allow-root --silent --quiet",
+      "node_modules/.bin/bower install --config.interactive=false -s --allow-root",
       "gulp clean",
       "gulp release"
     ]

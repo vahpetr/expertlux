@@ -17,13 +17,13 @@ var gulp = require('gulp'),
 var project = JSON.parse(fs.readFileSync('./project.json'));
 
 var content = './Content/';
-var styles = './Styles/';
-var scripts = './Scripts/';
 var webroot = './wwwroot/';
 
 var paths = {
     contentFavicon: content + 'favicon.ico',
     contentWebconfig: content + 'web.config',
+    contentHumans: content + 'humans.txt',
+    contentRobots: content + 'robots.txt',
     contentStyles: content + 'styles/**/*.css',
     contentScripts: content + 'scripts/**/*.js',
     contentImages: [
@@ -74,14 +74,14 @@ gulp.task('libs:clean', function () {
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task('prepare:favicon', function () {
-    return gulp.src(paths.contentFavicon)
+gulp.task('prepare:files', function () {
+    return gulp.src([
+        paths.contentFavicon,
+        paths.contentWebconfig,
+        paths.contentHumans,
+        paths.contentRobots
+    ])
         .pipe(gulp.dest(paths.siteFavicon));
-});
-
-gulp.task('prepare:webconfig', function () {
-    return gulp.src(paths.contentWebconfig)
-        .pipe(gulp.dest(paths.siteWebconfig));
 });
 
 gulp.task('styles:prepare', ['styles:clean'], function () {
@@ -175,8 +175,7 @@ gulp.task('scripts:watch', function (cb) {//'scripts:prepare'
 
 //development
 gulp.task('default', [
-    'prepare:favicon',
-    'prepare:webconfig',
+    'prepare:files',
     'styles:prepare',
     'scripts:prepare',
     'images:prepare',
@@ -188,8 +187,7 @@ gulp.task('default', [
 
 //release
 gulp.task('release', [
-    'prepare:favicon',
-    'prepare:webconfig',
+    'prepare:files',
     'styles:min:prepare',
     'scripts:min:prepare',
     'images:prepare',

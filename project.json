@@ -54,10 +54,10 @@
   ],
   "scripts": {
     "prepublish": [
-      "npm install",
+      "npm install --no-bin-links --no-optional",
       "node_modules/.bin/bower install --config.interactive=false -s --allow-root",
-      "gulp clean",
-      "gulp release"
+      "node_modules/.bin/gulp clean",
+      "node_modules/.bin/gulp release"
     ]
   },
   "configurations": {

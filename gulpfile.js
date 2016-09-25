@@ -120,11 +120,11 @@ gulp.task('images:prepare', ['images:clean'], function () {
             imagemin.gifsicle({
                 interlaced: false,
                 optimizationLevel: 3,
-                colors: 32
+                colors: 16
             }),
             imageminJpegRecompress({
                 quality: 'low',//low, medium, high and veryhigh.
-                method: 'ssim',//mpe, ssim, ms-ssim and smallfry,
+                method: 'smallfry',//mpe, ssim, ms-ssim and smallfry,
                 progressive: false,
                 subsample: 'default', //default, disable
                 strip: true
@@ -181,7 +181,7 @@ gulp.task('default', [
     'images:prepare',
     'libs:prepare',
     'styles:watch',
-    // 'scripts:watch',
+    'scripts:watch',
     'site:run'
 ]);
 

@@ -108,8 +108,8 @@
             </div>
             <span itemprop="telephone">89026460866</span>
             <span itemprop="telephone">2760866</span>
-            <span itemprop="email">expertlux@bk.ru</span>
-            <span itemprop="url">expertlux.com</span>
+            <a href="mailto:expertlux@bk.ru" itemprop="email">expertlux@bk.ru</a>
+            <a href="http://expertlux.com" itemprop="url">expertlux.com</a>
         </div>
     </body>
 </html>
@@ -123,7 +123,7 @@
     <script src="~/scripts/app.js"></script>
 </environment>
 <environment names="Staging,Production">
-    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css"
             asp-fallback-href="~/libs/bootstrap/dist/css/bootstrap.min.css"
             asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
     <link rel="stylesheet" href="~/site.min.css.gz" asp-append-version="true" />
@@ -131,14 +131,14 @@
             asp-fallback-href="~/libs/font-awesome/css/font-awesome.min.css"
             asp-fallback-test-class="fa" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"
             asp-fallback-src="~/libs/jquery/dist/jquery.min.js"
             asp-fallback-test="window.jQuery">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    </script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"
             asp-fallback-src="~/libs/bootstrap/dist/js/bootstrap.min.js"
             asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-    </script>
+    </script>-->
     <script src="~/app.min.js.gz" asp-append-version="true"></script>
 </environment>
 

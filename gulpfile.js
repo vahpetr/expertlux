@@ -20,7 +20,7 @@ var content = './Content/';
 var webroot = './wwwroot/';
 
 var paths = {
-    contentFavicon: content + 'favicon.ico',
+    contentFavicons: content + 'favicons/*.*',
     contentWebconfig: content + 'web.config',
     contentHumans: content + 'humans.txt',
     contentRobots: content + 'robots.txt',
@@ -40,6 +40,7 @@ var paths = {
     siteScriptsFolder: webroot + 'scripts/',
     siteImagesFolder: webroot + 'images/',
     siteLibsFolder: webroot + 'libs/',
+    siteFaviconsFolder: webroot + 'favicons/',
     siteStyleMin: webroot + 'site.min.css',
     siteScriptMin: webroot + 'app.min.js'
 };
@@ -74,14 +75,18 @@ gulp.task('libs:clean', function () {
         .pipe(rimraf({ force: true }));
 });
 
-gulp.task('prepare:files', function () {
+gulp.task('favicons:clean', function () {
+    return gulp.src(paths.siteFaviconsFolder, { read: false })
+        .pipe(rimraf({ force: true }));
+});
+
+gulp.task('files:prepare', function () {
     return gulp.src([
-        paths.contentFavicon,
         paths.contentWebconfig,
         paths.contentHumans,
         paths.contentRobots
     ])
-        .pipe(gulp.dest(paths.siteFavicon));
+    .pipe(gulp.dest(paths.siteFavicon));
 });
 
 gulp.task('styles:prepare', ['styles:clean'], function () {
@@ -116,33 +121,38 @@ gulp.task('scripts:min:prepare', function () {
 
 gulp.task('images:prepare', ['images:clean'], function () {
     return gulp.src(paths.contentImages)
-        .pipe(imagemin([
-            imagemin.gifsicle({
-                interlaced: false,
-                optimizationLevel: 3,
-                colors: 16
-            }),
-            imageminJpegRecompress({
-                quality: 'low',//low, medium, high and veryhigh.
-                method: 'smallfry',//mpe, ssim, ms-ssim and smallfry,
-                progressive: false,
-                subsample: 'default', //default, disable
-                strip: true
-            }),
-            imagemin.optipng({
-                optimizationLevel: 7,// default 3, range 0..7
-                bitDepthReduction: true,// default true
-                colorTypeReduction: true,// default true
-                paletteReduction: true// default true
-            }),
-            imagemin.svgo()
-        ]))
+        // .pipe(imagemin([
+        //     imagemin.gifsicle({
+        //         interlaced: false,
+        //         optimizationLevel: 3,
+        //         colors: 16
+        //     }),
+        //     imageminJpegRecompress({
+        //         quality: 'low',//low, medium, high and veryhigh.
+        //         method: 'smallfry',//mpe, ssim, ms-ssim and smallfry,
+        //         progressive: false,
+        //         subsample: 'default', //default, disable
+        //         strip: true
+        //     }),
+        //     imagemin.optipng({
+        //         optimizationLevel: 7,// default 3, range 0..7
+        //         bitDepthReduction: true,// default true
+        //         colorTypeReduction: true,// default true
+        //         paletteReduction: true// default true
+        //     }),
+        //     imagemin.svgo()
+        // ]))
         .pipe(gulp.dest(paths.siteImagesFolder));
 });
 
 gulp.task('libs:prepare', ['libs:clean'], function() {
     return gulp.src(paths.contentLibs)
         .pipe(gulp.dest(paths.siteLibsFolder));
+});
+
+gulp.task('favicons:prepare', ['favicons:clean'], function () {
+    return gulp.src([paths.contentFavicons])
+    .pipe(gulp.dest(paths.siteFaviconsFolder));
 });
 
 gulp.task('prepublish', shell.task(project.scripts.prepublish));
@@ -175,21 +185,23 @@ gulp.task('scripts:watch', function (cb) {//'scripts:prepare'
 
 //development
 gulp.task('default', [
-    'prepare:files',
+    'files:prepare',
     'styles:prepare',
     'scripts:prepare',
     'images:prepare',
     'libs:prepare',
+    'favicons:prepare',
     'styles:watch',
-    'scripts:watch',
+    // 'scripts:watch',
     'site:run'
 ]);
 
 //release
 gulp.task('release', [
-    'prepare:files',
+    'files:prepare',
     'styles:min:prepare',
     'scripts:min:prepare',
     'images:prepare',
-    'libs:prepare'
+    'libs:prepare',
+    'favicons:prepare'
 ]);

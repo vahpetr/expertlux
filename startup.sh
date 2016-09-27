@@ -5,7 +5,7 @@ if [ -f "/run/expertlux-live.sock" ]; then
 fi
 
 cd /var/www/expertlux
-/root/.dnx/runtimes/dnx-mono.1.0.0-rc1-update2/bin/dnu web-live \
+/root/.dnx/runtimes/dnx-mono.1.0.0-rc1-update2/bin/dnx \
 --appbase /var/www/expertlux Microsoft.Dnx.ApplicationHost \
 --configuration Release Microsoft.AspNet.Server.Kestrel \
 --server.urls http://unix:/run/expertlux-live.sock

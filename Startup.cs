@@ -12,6 +12,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using expertlux.Models;
 using expertlux.Services;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.StaticFiles;
+using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.Cors.Infrastructure;
 // using Microsoft.VisualStudio.Web.BrowserLink.Loader;
 
 //https://docs.asp.net/en/latest/security/app-secrets.html
@@ -53,7 +60,7 @@ namespace expertlux
                 // Ensure that all URL's are lower-case.
                 routeOptions.LowercaseUrls = true;
             });
-            
+
             // Add framework services.
             services.AddEntityFramework()
                 .AddSqlite()
@@ -64,12 +71,46 @@ namespace expertlux
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.CacheProfiles.Add("Default",
+                    new CacheProfile()
+                    {
+                        Duration = 60 * 60 * 24 * 7 // 7 day
+                    });
+                options.CacheProfiles.Add("Never",
+                    new CacheProfile()
+                    {
+                        Location = ResponseCacheLocation.None,
+                        NoStore = true
+                    });
+                options.CacheProfiles.Add("Day",
+                    new CacheProfile()
+                    {
+                        Duration = 60 * 60 * 24 // day
+                    });
+            })
+            .AddJsonOptions(options =>
+            {
+                var settings = options.SerializerSettings;
+                settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                settings.Converters.Add(new StringEnumConverter());
+            });
+
+            services.AddCors(options => options.AddPolicy(
+                "AllowAll",
+                new CorsPolicyBuilder()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                    .Build()
+            ));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            
+
             //http://asp.net-hacker.rocks/2016/03/21/configure-aspnetcore.html
             services.AddInstance<IConfigurationRoot>(Configuration);
         }
@@ -86,9 +127,9 @@ namespace expertlux
                 // the browser. You can use the Refresh 
                 // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter
                 // to refresh the browser.
-        
+
                 // app.UseBrowserLink();
-                
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
@@ -111,7 +152,34 @@ namespace expertlux
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
-            app.UseStaticFiles();
+            app.UseDefaultFiles();
+            
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = context =>
+                {
+                    var headers = context.Context.Response.GetTypedHeaders();
+                    headers.Expires = DateTime.UtcNow.AddDays(7);
+                    headers.CacheControl = new CacheControlHeaderValue()
+                    {
+                        MaxAge = TimeSpan.FromDays(7),
+                        Public = true
+                    };
+                    if (headers.ContentType.MediaType == "application/x-gzip")
+                    {
+                        if (context.File.Name.EndsWith("js.gz"))
+                        {
+                            headers.ContentType = new MediaTypeHeaderValue("application/javascript");
+                        }
+                        else if (context.File.Name.EndsWith("css.gz"))
+                        {
+                            headers.ContentType = new MediaTypeHeaderValue("text/css");
+                        }
+
+                        context.Context.Response.Headers.Add("Content-Encoding", "gzip");
+                    }
+                }
+            });
 
             app.UseIdentity();
 
@@ -123,6 +191,8 @@ namespace expertlux
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseCors("AllowAll");
         }
 
         // Entry point for the application.
